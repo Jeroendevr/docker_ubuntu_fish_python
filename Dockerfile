@@ -2,6 +2,11 @@ FROM ubuntu:latest
 
 # TimeZone is needed otherwise config needs to happen during build
 ENV TZ=Europe/Amsterdam
+# Locales are needed otherwise a lot of errors pop up
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 
 # Install usefull tools
