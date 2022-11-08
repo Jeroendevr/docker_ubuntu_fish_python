@@ -46,8 +46,10 @@ RUN apt-get -y install \
 RUN apt-get -y autoclean
 
 # Switch to Fish Shell
+# Thanks to https://github.com/dideler/docker-fish-shell
 SHELL ["fish", "--command"]
 RUN chsh -s /usr/bin/fish
+ENTRYPOINT [ "fish" ]
 
 # PyEnv installation
 # https://github.com/pyenv/pyenv#basic-github-checkout
@@ -62,3 +64,6 @@ RUN pyenv global ${PY_VERSION}
 RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
 RUN apt-get install -y redis
+
+
+# RUN pip -V
