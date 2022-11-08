@@ -54,4 +54,11 @@ RUN chsh -s /usr/bin/fish
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH ${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:$PATH
-RUN pyenv install 3.10
+ENV PY_VERSION 3.10
+RUN pyenv install ${PY_VERSION}
+RUN pyenv global ${PY_VERSION}
+
+# Redis section
+RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
+RUN apt-get install -y redis
