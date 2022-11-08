@@ -56,9 +56,8 @@ ENTRYPOINT [ "fish" ]
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH ${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:$PATH
-ENV PY_VERSION 3.10
-RUN pyenv install ${PY_VERSION}
-RUN pyenv global ${PY_VERSION}
+RUN pyenv install 3.10
+RUN pyenv global 3.10
 
 # Redis section
 RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
